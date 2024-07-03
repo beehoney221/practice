@@ -1,6 +1,5 @@
 package com.example.marvel.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -25,7 +24,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,8 +31,9 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.marvel.Hero
-import com.example.marvel.R
 import com.example.marvel.data.Heroes
+
+val marvelLogo = "https://iili.io/JMnuvbp.png"
 
 @Composable
 fun StartScreen(navController: NavHostController) {
@@ -46,18 +45,22 @@ fun StartScreen(navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally
         )
         {
-            Image(
-                painter = painterResource(id = R.drawable.marvellogo),
-                contentDescription = "Logo",
-                modifier = Modifier.size(200.dp)
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(marvelLogo)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = "Marvel Logo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(width = 220.dp, height = 120.dp).padding(top = 40.dp, bottom = 30.dp)
             )
 
             Text(
                 text = "Choose your hero",
-                fontSize = 30.sp,
+                fontSize = 35.sp,
                 fontWeight = FontWeight(weight = 1000),
                 color = Color.White,
-                modifier = Modifier.padding(bottom = 5.dp)
+                modifier = Modifier.padding(top = 15.dp, bottom = 10.dp)
             )
 
             ScrollableList(heroes = Heroes.listHero, navController = navController)
@@ -75,7 +78,7 @@ fun ScrollableList(
         contentPadding = PaddingValues(all = 20.dp),
         modifier = Modifier.padding(start = 5.dp, end = 5.dp)){
         items(heroes) { hero ->
-            Spacer(modifier = Modifier.padding(start = 20.dp))
+            Spacer(modifier = Modifier.padding(start = 15.dp))
             HeroCard(
                 heroLogo = hero.logo,
                 heroName = hero.name,
@@ -94,7 +97,7 @@ fun HeroCard(
 ) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxHeight(),
+        modifier = Modifier.fillMaxHeight()
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
