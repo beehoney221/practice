@@ -7,19 +7,19 @@ import com.example.marvel.R
 object Heroes {
     val listHero = listOf(
         Hero(
-            id = R.drawable.deadpool,
+            logo = "https://iili.io/dK7naEv.md.png",
             name = "Deadpool",
             description = "Please don’t make the super suit green...or animated!",
             screen = MarvelScreen.Deadpool
         ),
         Hero(
-            id = R.drawable.ironman,
+            logo = "https://iili.io/dK7obUl.md.png",
             name = "Iron Man",
             description = "I AM IRON MAN",
             screen = MarvelScreen.IronMan
         ),
         Hero(
-            id = R.drawable.spiderman,
+            logo = "https://iili.io/dK7x3ib.md.png",
             name = "Spider Man",
             description = "In iron suit",
             screen = MarvelScreen.SpiderMan
