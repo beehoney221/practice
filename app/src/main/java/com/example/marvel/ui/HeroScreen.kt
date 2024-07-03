@@ -17,11 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.marvel.Hero
 import com.example.marvel.data.Heroes
 
@@ -31,12 +34,22 @@ fun HeroScreen(
     onClick: () -> Unit
 ) {
     Box(modifier = Modifier.background(Color.Transparent)) {
-        Image(
-            painterResource(id = hero.id),
-            contentDescription = hero.name,
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(hero.logo)
+                .crossfade(true)
+                .build(),
+            contentDescription = "Image",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
+
+//        Image(
+//            painterResource(id = hero.id),
+//            contentDescription = hero.name,
+//            contentScale = ContentScale.Crop,
+//            modifier = Modifier.fillMaxSize()
+//        )
 
         IconButton(
             modifier = Modifier.padding(top = 5.dp, start = 5.dp),
