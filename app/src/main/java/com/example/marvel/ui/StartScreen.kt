@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.BottomStart
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -45,10 +48,20 @@ fun StartScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Color.Black),
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color.Black,
+                            MaterialTheme.colorScheme.onBackground,
+                            MaterialTheme.colorScheme.onErrorContainer,
+                            MaterialTheme.colorScheme.error,
+                            Color.Red
+                        ),
+                        start = Offset(200.0f, 300.0f)
+                    )
+                ),
             horizontalAlignment = Alignment.CenterHorizontally
-        )
-        {
+        ){
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data("https://iili.io/JMnuvbp.png")
@@ -86,7 +99,8 @@ fun ScrollableList(
         contentPadding = PaddingValues(all = 20.dp),
         state = listState,
         flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
-        modifier = Modifier.padding(start = 5.dp, end = 5.dp)){
+        modifier = Modifier.padding(start = 5.dp, end = 5.dp)
+    ){
         items(heroes) { hero ->
             Spacer(modifier = Modifier.padding(start = 15.dp))
             HeroCard(
@@ -104,7 +118,7 @@ fun HeroCard(
     heroLogo: String,
     heroName: String,
     onClick: () -> Unit
-) {
+){
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxHeight()
