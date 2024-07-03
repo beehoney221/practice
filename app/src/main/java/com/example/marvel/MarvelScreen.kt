@@ -1,6 +1,6 @@
 package com.example.marvel
 
-import HeroScreen
+import com.example.marvel.ui.HeroScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable

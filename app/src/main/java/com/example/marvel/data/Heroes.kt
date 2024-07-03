@@ -2,7 +2,6 @@ package com.example.marvel.data
 
 import com.example.marvel.Hero
 import com.example.marvel.MarvelScreen
-import com.example.marvel.R
 
 object Heroes {
     val listHero = listOf(
