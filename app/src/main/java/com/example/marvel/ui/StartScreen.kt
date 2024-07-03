@@ -1,7 +1,9 @@
 package com.example.marvel.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,8 +13,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,10 +37,10 @@ import coil.request.ImageRequest
 import com.example.marvel.Hero
 import com.example.marvel.data.Heroes
 
-val marvelLogo = "https://iili.io/JMnuvbp.png"
-
 @Composable
 fun StartScreen(navController: NavHostController) {
+    val listState: LazyListState = rememberLazyListState()
+
     Surface {
         Column(
             modifier = Modifier
@@ -47,12 +51,14 @@ fun StartScreen(navController: NavHostController) {
         {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(marvelLogo)
+                    .data("https://iili.io/JMnuvbp.png")
                     .crossfade(true)
                     .build(),
                 contentDescription = "Marvel Logo",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.size(width = 220.dp, height = 120.dp).padding(top = 40.dp, bottom = 30.dp)
+                modifier = Modifier
+                    .size(width = 220.dp, height = 120.dp)
+                    .padding(top = 40.dp, bottom = 30.dp)
             )
 
             Text(
@@ -63,19 +69,23 @@ fun StartScreen(navController: NavHostController) {
                 modifier = Modifier.padding(top = 15.dp, bottom = 10.dp)
             )
 
-            ScrollableList(heroes = Heroes.listHero, navController = navController)
+            ScrollableList(heroes = Heroes.listHero, navController = navController, listState = listState)
 
             Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ScrollableList(
     heroes: List<Hero>,
+    listState: LazyListState,
     navController: NavHostController) {
     LazyRow(
         contentPadding = PaddingValues(all = 20.dp),
+        state = listState,
+        flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
         modifier = Modifier.padding(start = 5.dp, end = 5.dp)){
         items(heroes) { hero ->
             Spacer(modifier = Modifier.padding(start = 15.dp))
@@ -106,7 +116,10 @@ fun HeroCard(
                 .build(),
             contentDescription = "Image",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)).clickable(onClick = onClick)
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(16.dp))
+                .clickable(onClick = onClick)
         )
 
         Text(
