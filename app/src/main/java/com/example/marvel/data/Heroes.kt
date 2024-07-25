@@ -1,6 +1,5 @@
 package com.example.marvel.data
 
-import com.example.marvel.Hero
 import com.example.marvel.MarvelScreen
 
 object Heroes {

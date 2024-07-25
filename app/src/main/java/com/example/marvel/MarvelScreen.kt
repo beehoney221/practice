@@ -12,8 +12,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.marvel.data.Heroes
 import com.example.marvel.ui.StartScreen
 
-data class Hero(val logo: String, val name: String, val description: String, val screen: MarvelScreen)
-
 enum class MarvelScreen {
     Start,
     Deadpool,
@@ -52,7 +50,7 @@ fun MarvelApp(
 
             composable(route = MarvelScreen.SpiderMan.name){
                 HeroScreen(
-                    Heroes.listHero[2],
+                    hero = Heroes.listHero[2],
                     onClick = { navController.navigateUp() }
                 )
             }

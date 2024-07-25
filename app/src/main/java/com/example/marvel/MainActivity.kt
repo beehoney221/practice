@@ -11,11 +11,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MarvelTheme {
-                Surface {
-                    MarvelApp()
-                }
+                MarvelApp()
             }
         }
     }
 }
-

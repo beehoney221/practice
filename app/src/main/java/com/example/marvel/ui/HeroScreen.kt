@@ -1,6 +1,5 @@
 package com.example.marvel.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.marvel.Hero
+import com.example.marvel.data.Hero
 import com.example.marvel.data.Heroes
 
 @Composable
@@ -33,7 +32,7 @@ fun HeroScreen(
     hero: Hero,
     onClick: () -> Unit
 ){
-    Box(modifier = Modifier.background(Color.Transparent)) {
+    Box {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(hero.logo)

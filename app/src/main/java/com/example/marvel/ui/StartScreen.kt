@@ -1,5 +1,6 @@
 package com.example.marvel.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -7,6 +8,7 @@ import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,12 +34,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.marvel.Hero
+import com.example.marvel.data.Hero
 import com.example.marvel.data.Heroes
 
 @Composable
@@ -52,7 +55,6 @@ fun StartScreen(navController: NavHostController) {
                     brush = Brush.linearGradient(
                         colors = listOf(
                             Color.Black,
-                            MaterialTheme.colorScheme.onBackground,
                             MaterialTheme.colorScheme.onErrorContainer,
                             MaterialTheme.colorScheme.error,
                             Color.Red
@@ -146,4 +148,24 @@ fun HeroCard(
                 .padding(start = 20.dp, bottom = 30.dp)
         )
     }
+}
+
+
+@Preview(name = "Light")
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark")
+@Composable
+fun PreviewBackground(){
+    Row(modifier = Modifier
+        .fillMaxSize()
+        .background(
+            brush = Brush.linearGradient(
+                colors = listOf(
+                    Color.Black,
+                    MaterialTheme.colorScheme.onErrorContainer,
+                    MaterialTheme.colorScheme.error,
+                    Color.Red
+                ),
+                start = Offset(200.0f, 300.0f)
+            )
+        )) { }
 }
